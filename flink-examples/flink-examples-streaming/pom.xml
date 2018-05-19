@@ -193,7 +193,7 @@ under the License.
 
 							<archive>
 								<manifestEntries>
-									<program-class>org.apache.flink.streaming.examples.loop.WordCount</program-class>
+									<program-class>org.apache.flink.streaming.examples.loop.WordCountLoopProcess</program-class>
 								</manifestEntries>
 							</archive>
 
