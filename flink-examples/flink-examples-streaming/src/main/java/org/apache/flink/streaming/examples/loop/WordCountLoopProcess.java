@@ -191,10 +191,10 @@ public class WordCountLoopProcess {
 
 		env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime); //turn on watermark
 
-		DataStream<Tuple2<String, Long>> watermarkStream = text.flatMap(new Tokenizer()).assignTimestampsAndWatermarks(new MyAssignerWithPeriodicWatermarks(wmkMaxOutOrder));
+		DataStream<Tuple2<String, Long>> watermarkStream = text.flatMap(new Tokenizer()).assignTimestampsAndWatermarks(new MyAssignerWithPeriodicWatermarks(wmkMaxOutOrder * 1000));
 
 		DataStream<Tuple6<String, Integer, String, String, String, String>> window = watermarkStream.keyBy(1).
-			window(TumblingEventTimeWindows.of(Time.seconds(tumbWinTime)))
+			window(TumblingEventTimeWindows.of(Time.seconds(tumbWinTime * 1000)))
 			.apply(new MyWindowFunction());
 
 		// emit result
